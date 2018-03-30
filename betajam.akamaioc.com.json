@@ -1,0 +1,358 @@
+{
+  "accountId": "act_B-M-2C7HU2K",
+  "contractId": "ctr_P-2A6PT3L",
+  "groupId": "grp_114866",
+  "propertyId": "prp_444064",
+  "propertyName": "betajam.akamaioc.com",
+  "propertyVersion": 8,
+  "etag": "a7cffcf5bb4ba2732e3de6617bf2613502835d1e",
+  "rules": {
+    "name": "default",
+    "children": [
+      {
+        "name": "Adaptive Image Compression",
+        "children": [],
+        "behaviors": [
+          {
+            "name": "adaptiveImageCompression",
+            "options": {
+              "compressMobile": true,
+              "compressStandard": true,
+              "tier1MobileCompressionMethod": "BYPASS",
+              "tier2MobileCompressionMethod": "COMPRESS",
+              "tier2MobileCompressionValue": 60,
+              "tier3MobileCompressionMethod": "COMPRESS",
+              "tier3MobileCompressionValue": 40,
+              "tier1StandardCompressionMethod": "BYPASS",
+              "tier2StandardCompressionMethod": "BYPASS",
+              "tier3StandardCompressionMethod": "COMPRESS",
+              "tier3StandardCompressionValue": 40
+            }
+          }
+        ],
+        "criteria": [
+          {
+            "name": "fileExtension",
+            "options": {
+              "matchCaseSensitive": false,
+              "matchOperator": "IS_ONE_OF",
+              "values": [
+                "jpg",
+                "jpeg",
+                "jpe",
+                "jif",
+                "jfif",
+                "jfi"
+              ]
+            }
+          }
+        ],
+        "criteriaMustSatisfy": "all"
+      },
+      {
+        "name": "Enable HTTP2",
+        "children": [],
+        "behaviors": [
+          {
+            "name": "http2",
+            "options": {
+              "enabled": true
+            }
+          }
+        ],
+        "criteria": [
+          {
+            "name": "hostname",
+            "options": {
+              "matchOperator": "IS_ONE_OF",
+              "values": [
+                "betajam.akamaioc.com"
+              ]
+            }
+          }
+        ],
+        "criteriaMustSatisfy": "all"
+      },
+      {
+        "name": "Compressible Objects",
+        "children": [],
+        "behaviors": [
+          {
+            "name": "gzipResponse",
+            "options": {
+              "behavior": "ALWAYS"
+            }
+          }
+        ],
+        "criteria": [
+          {
+            "name": "contentType",
+            "options": {
+              "matchCaseSensitive": false,
+              "matchOperator": "IS_ONE_OF",
+              "matchWildcard": true,
+              "values": [
+                "text/*",
+                "application/javascript",
+                "application/x-javascript",
+                "application/x-javascript*",
+                "application/json",
+                "application/x-json",
+                "application/*+json",
+                "application/*+xml",
+                "application/text",
+                "application/vnd.microsoft.icon",
+                "application/vnd-ms-fontobject",
+                "application/x-font-ttf",
+                "application/x-font-opentype",
+                "application/x-font-truetype",
+                "application/xmlfont/eot",
+                "application/xml",
+                "font/opentype",
+                "font/otf",
+                "font/eot",
+                "image/svg+xml",
+                "image/vnd.microsoft.icon"
+              ]
+            }
+          }
+        ],
+        "criteriaMustSatisfy": "all",
+        "comments": "Compresses content to improve performance of clients with slow connections.  Applies Last Mile Acceleration to requests when the returned object supports gzip compression."
+      },
+      {
+        "name": "Cache extensions",
+        "children": [],
+        "behaviors": [
+          {
+            "name": "caching",
+            "options": {
+              "behavior": "MAX_AGE",
+              "ttl": "1d",
+              "mustRevalidate": false
+            }
+          }
+        ],
+        "criteria": [
+          {
+            "name": "fileExtension",
+            "options": {
+              "matchCaseSensitive": false,
+              "matchOperator": "IS_ONE_OF",
+              "values": [
+                "jpg"
+              ]
+            }
+          }
+        ],
+        "criteriaMustSatisfy": "all"
+      },
+      {
+        "name": "Cache /demo-slides.html",
+        "children": [],
+        "behaviors": [
+          {
+            "name": "caching",
+            "options": {
+              "behavior": "MAX_AGE",
+              "ttl": "1d",
+              "mustRevalidate": false
+            }
+          }
+        ],
+        "criteria": [
+          {
+            "name": "path",
+            "options": {
+              "matchOperator": "MATCHES_ONE_OF",
+              "values": [
+                "/demo-slides.html"
+              ],
+              "matchCaseSensitive": false
+            }
+          }
+        ],
+        "criteriaMustSatisfy": "all"
+      }
+    ],
+    "behaviors": [
+      {
+        "name": "cpCode",
+        "options": {
+          "value": {
+            "id": 677667
+          }
+        }
+      },
+      {
+        "name": "allowPost",
+        "options": {
+          "enabled": true,
+          "allowWithoutContentLength": false
+        }
+      },
+      {
+        "name": "allowDelete",
+        "options": {
+          "enabled": true
+        }
+      },
+      {
+        "name": "allowPatch",
+        "options": {
+          "enabled": true
+        }
+      },
+      {
+        "name": "allowPut",
+        "options": {
+          "enabled": true
+        }
+      },
+      {
+        "name": "dnsAsyncRefresh",
+        "options": {
+          "enabled": true,
+          "timeout": "2h"
+        }
+      },
+      {
+        "name": "origin",
+        "options": {
+          "cacheKeyHostname": "REQUEST_HOST_HEADER",
+          "compress": true,
+          "enableTrueClientIp": true,
+          "trueClientIpHeader": "True-Client-IP",
+          "trueClientIpClientSetting": false,
+          "forwardHostHeader": "CUSTOM",
+          "customForwardHostHeader": "betajam.akamaioc.com",
+          "hostname": "origin-betajam.akamaioc.com",
+          "httpPort": 80,
+          "originType": "CUSTOMER",
+          "verificationMode": "PLATFORM_SETTINGS",
+          "httpsPort": 443,
+          "originSni": true,
+          "originTlsChoice": "DYNAMIC"
+        }
+      },
+      {
+        "name": "sureRoute",
+        "options": {
+          "enabled": true,
+          "type": "PERFORMANCE",
+          "testObjectUrl": "/sureroute-test-object.html",
+          "forceSslForward": false,
+          "enableCustomKey": false,
+          "raceStatTtl": "86400s",
+          "toHostStatus": "INCOMING_HH"
+        }
+      },
+      {
+        "name": "adaptiveAcceleration",
+        "options": {
+          "enablePush": true,
+          "useDefaultPush": true,
+          "enablePreconnect": true,
+          "useDefaultPreconnect": true
+        }
+      },
+      {
+        "name": "frontEndOptimization",
+        "options": {
+          "enabled": true
+        }
+      },
+      {
+        "name": "realUserMonitoring",
+        "options": {
+          "enabled": true
+        }
+      },
+      {
+        "name": "edgeScape",
+        "options": {
+          "enabled": true
+        }
+      },
+      {
+        "name": "tieredDistribution",
+        "options": {
+          "enabled": true,
+          "tieredDistributionMap": "CH2"
+        }
+      },
+      {
+        "name": "caching",
+        "options": {
+          "behavior": "NO_STORE"
+        }
+      },
+      {
+        "name": "cacheKeyQueryParams",
+        "options": {
+          "behavior": "INCLUDE_ALL_PRESERVE_ORDER"
+        }
+      },
+      {
+        "name": "cacheRedirect",
+        "options": {
+          "enabled": "false"
+        }
+      },
+      {
+        "name": "cacheError",
+        "options": {
+          "enabled": true,
+          "ttl": "10s",
+          "preserveStale": true
+        }
+      },
+      {
+        "name": "downstreamCache",
+        "options": {
+          "behavior": "ALLOW",
+          "allowBehavior": "LESSER",
+          "sendHeaders": "CACHE_CONTROL_AND_EXPIRES",
+          "sendPrivate": false
+        }
+      }
+    ],
+    "options": {
+      "is_secure": true
+    },
+    "comments": "The behaviors in the Default Rule apply to all requests for the property hostname(s) unless another rule overrides the Default Rule settings."
+  },
+  "warnings": [
+    {
+      "type": "https://problems.luna.akamaiapis.net/papi/v0/validation/validation_message.ssl_delegate_warning_intro",
+      "errorLocation": "#/rules/behaviors/6",
+      "detail": "Akamai enhanced the `Origin Server` behavior. Before configuring any settings, click the <strong>Verification Settings</strong> drop-down menu and read the context-sensitive information that appears."
+    },
+    {
+      "type": "https://problems.luna.akamaiapis.net/papi/v0/validation/validation_message.ssl_delegate_warning_rotate",
+      "errorLocation": "#/rules/behaviors/6",
+      "detail": "When rotating your origin's certificate, change your setting in the `Origin Server` behavior from <strong>Use Platform Settings</strong> to <strong>Choose Your Own</strong> and ensure both your old and new certificates are trusted. Your new certificate must be trusted <strong>before</strong> you start using it. You must continue to trust your old certificate until you have started using the new certificate. Failure to follow <a href=\"/dl/rd/propmgr/PropMgr_CSH.htm#1090\" target=\"_blank\">this procedure</a> may result in a service outage or a security breach. It is recommended that you contact your account team with any questions or concerns <strong>before</strong> activating your property."
+    },
+    {
+      "type": "https://problems.luna.akamaiapis.net/papi/v0/validation/generic_behavior_issue.enablefeo_warning",
+      "errorLocation": "#/rules/behaviors/8",
+      "detail": "`Adaptive Acceleration` : The following Front End Optimization (FEO) features are compatible: On-Demand Image Loading,  Async JS, and Critical CSS. Other FEO features should be disabled. Please contact your account team with any questions or concerns <strong>before</strong> activating FEO and `Adaptive Acceleration` in this property."
+    },
+    {
+      "type": "https://problems.luna.akamaiapis.net/papi/v0/validation/generic_behavior_issue.enabletransferencoding_warning",
+      "errorLocation": "#/rules/children/1/behaviors/0",
+      "detail": "HTTP/2 can make use of Chunked Transfer Encoding (CTE). To ensure that requests using CTE are not denied, set the Chunked Transfer Encoding behavior to \"Allow\" and enable CTE on your origin."
+    },
+    {
+      "type": "https://problems.luna.akamaiapis.net/papi/v0/validation/generic_behavior_issue.enabletransferencoding_warning",
+      "errorLocation": "#/rules/children/1/behaviors/0",
+      "detail": "HTTP/2 can make use of Chunked Transfer Encoding (CTE). To ensure that requests using CTE are not denied, set the Chunked Transfer Encoding behavior to \"Allow\" and enable CTE on your origin."
+    },
+    {
+      "type": "https://problems.luna.akamaiapis.net/papi/v0/validation/generic_behavior_issue.enabletransferencoding_warning",
+      "errorLocation": "#/rules/children/1/behaviors/0",
+      "detail": "HTTP/2 can make use of Chunked Transfer Encoding (CTE). To ensure that requests using CTE are not denied, set the Chunked Transfer Encoding behavior to \"Allow\" and enable CTE on your origin."
+    }
+  ],
+  "ruleFormat": "v2016-11-15"
+}
